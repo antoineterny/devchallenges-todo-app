@@ -1,38 +1,233 @@
-.App {
+:root {
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+
+  --indigo-100: #e0e7ff;
+  --indigo-200: #c7d2fe;
+  --indigo-500: #6366f1;
+  --indigo-500: #4f46e5;
+  --indigo-700: #4338ca;
+  --indigo-900: #312e81;
+
+  --green-100: #d1fae5;
+  --green-200: #a7f3d0;
+  --green-600: #059669;
+  --green-900: #064e3b;
+
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-500: #EF4444;
+  --red-600: #dc2626;
+  --red-900: #7f1d1d;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  color: var(--gray-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 32px;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.todo-app {
+  margin: 0 auto;
+  max-width: 620px;
+  /* background-color: gainsboro; */
+}
+
+h1 {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
   text-align: center;
+  letter-spacing: -0.045em;
+  color: var(--gray-800);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.menu {
+  width: 100%;
+  height: 46px;
+  /* background-color: greenyellow; */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-around;
+  border-bottom: 1px solid var(--gray-300);
+  margin-bottom: 18px;
+  position: relative;
+}
+.menu::after {
+  content: "";
+  width: 100%;
+  height: 8px;
+  background-color: white;
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+}
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: white;
+    font-family: "Manrope", sans-serif;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+.menu button {
+  height: 100%;
+  width: 10ch;
+
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--gray-800);
+}
+.menu button:hover::before {
+  content: "";
+  width: 100%;
+  height: 8px;
+  border-radius: 99px;
+  background-color: var(--indigo-200);
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  margin-bottom: 32px;
+}
+input[type="text"] {
+  padding: 20px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: 12px;
+  margin-right: 25px;
+  flex-grow: 1;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--gray-800);
+}
+input[type="text"]::placeholder {
+  font-weight: 500;
+  color: var(--gray-300);
+}
+input[type="submit"] {
+  padding: 20px 40px;
+  border: none;
+  background-color: var(--indigo-500);
+  border-radius: 12px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.todo-item {
+  margin-bottom: 1.5em;
+  display: flex;
+}
+label {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--gray-800);
+  padding-left: 35px;
+  cursor: pointer;
+  position: relative;
+  flex-grow: 1;
+}
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 21px;
+  width: 21px;
+  border: 1px solid var(--gray-400);
+  border-radius: 4px;
+}
+label:hover input ~ .checkmark {
+  background-color: var(--indigo-100);
+}
+label input:checked ~ .checkmark {
+  background-color: var(--indigo-500);
+}
+label .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.completed {
+  text-decoration: line-through;
+  color: var(--gray-500);
+}
+.hidden {
+  display: none;
+}
+.menu button.highlighted::before {
+  content: "";
+  width: 100%;
+  height: 8px;
+  border-radius: 99px;
+  background-color: var(--indigo-500);
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+.menu button.highlighted:hover::before {
+  background-color: var(--indigo-500);
+}
+
+.todo-item svg {
+  fill: var(--gray-400);
+}
+.todo-item button:hover svg {
+  fill: var(--red-500);
+}
+
+.delete-all {
+  float: right;
+  border-radius: 4px;
+  background-color: var(--red-500);
+  padding: 13px 26px 13px 22px;
+  color: white;
+  font-weight: 600;
+}
+.delete-all svg {
+  fill: white;
+  margin-right: .5em;
+  vertical-align: bottom;
 }
